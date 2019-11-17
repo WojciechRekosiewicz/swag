@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApplication6</name>
+    </assembly>
+    <members>
+        <member name="M:WebApplication6.Controllers.WeatherForecastController.Get">
+            <summary>
+            Get API Value
+            </summary>
+            <remarks>This API will get the values.</remarks>
+        </member>
+    </members>
+</doc>

@@ -23,6 +23,11 @@ namespace WebApplication6.Controllers
             _logger = logger;
         }
 
+        // GET api/values
+        /// <summary>
+        /// Get API Value
+        /// </summary>
+        /// <remarks>This API will get the values.</remarks>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
