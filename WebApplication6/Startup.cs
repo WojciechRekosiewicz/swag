@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WebApplication6
 {
@@ -25,7 +26,32 @@ namespace WebApplication6
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddControllersAsServices();
+            //services.AddSingleton<DataService>();
+
+            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "API",
+                    Description = "Test API with ASP.NET Core 3.0",
+                    TermsOfService = "None",
+                    Contact = new Contact()
+                    {
+                        Name = "Dotnet Detail",
+                        Email = "dotnetdetail@gmail.com",
+                        Url = "www.dotnetdetail.net"
+                    },
+                    License = new License
+                    {
+                        Name = "ABC",
+                        Url = "www.dotnetdetail.net"
+                    },
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +63,8 @@ namespace WebApplication6
             }
 
             app.UseHttpsRedirection();
+            app.UseSwagger();
+
 
             app.UseRouting();
 
@@ -45,6 +73,11 @@ namespace WebApplication6
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1");
             });
         }
     }
